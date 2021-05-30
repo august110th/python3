@@ -13,11 +13,20 @@ json_one = "https://raw.githubusercontent.com/mledoze/countries/master/countries
 
 
 class Json_one_iterate():
+
     def __iter__(self):
+        self.counter = 1
         with open('countries.json') as f:
             templates = json.load(f)
+            self.x = (templates[self.counter]['name']['common'])
+            print(self.x)
         return self
 
     def __next__(self):
-        link = next(self.links)
-        return requests.get(link).text
+        self.counter += 1
+        return self.x
+
+
+pages = Json_one_iterate()
+for names in pages:
+    print(names)
