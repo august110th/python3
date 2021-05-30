@@ -24,7 +24,8 @@ class Json_one_iterate():
 
     def __next__(self):
         self.counter += 1
-        return self.x
+        link = next(self.x)
+        return link
 
 
 pages = Json_one_iterate()
