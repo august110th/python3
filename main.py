@@ -1,12 +1,11 @@
 import re
 import json
 import requests
-import pprint
+# import pprint
 
 with open('countries.json') as f:
     templates = json.load(f)
-    x = re.findall("name", templates)
-    print(x)
+    print(templates[1]['name']['common'])
 
 
 
