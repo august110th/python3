@@ -5,12 +5,11 @@ import requests
 
 with open('countries.json') as f:
     templates = json.load(f)
-    data = json.loads(templates.text)
-    data = json.dumps(data)
+    data = json.dumps(templates)
+    # print(data)
 
-    print(data)
-    # names = re.findall(r'(?<="common" :\s").+(?=",[\s\S]+"official")', templates)
-    # print(names)
+    names = re.findall(r'("name": \s("common":\s").+(?=",[\s\S]+"official")', data)
+    print(names)
 
 
 
