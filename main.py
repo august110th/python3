@@ -15,13 +15,15 @@ class Json_one_iterate():
     def __iter__(self):
         with open('countries.json') as f:
             data = json.load(f)
-            self.x = re.findall('("name": {"common":)''(.*?)''("official":)', data)
+            self.x = iter(re.findall('("name": {"common":)''(.*?)''("official":)', data))
+            # self.x = iter(set(re.findall('("name": {"common":)''(.*?)''("official":)', data)))
             # print(self.x)
         return self
     def __next__(self):
-        t = next(self.x)
-        return t
+        t = self.x.pop()
+        return t.text
 
-pages = Json_one_iterate()
-for names in pages:
-    print(names)
+pages = tuple(Json_one_iterate())
+print(pages)
+# for names in pages:
+#     print(names)
