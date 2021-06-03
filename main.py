@@ -1,5 +1,6 @@
 import json
 
+
 def json_reader(file):
     with open(file.encode()) as f:
         names = json.load(f)
