@@ -1,29 +1,29 @@
-import re
 import json
-import requests
 
-#
-# with open('countries.json') as f:
-#     templates = json.load(f)
-#     data = json.dumps(templates)
-#     # print(data)
-#
-#     names = re.findall('("name": {"common":)''(.*?)''("official":)' ,data)
-#     print(names)
+def json_reader(file):
+    with open(file.encode()) as f:
+        names = json.load(f)
+        print(names)
+    return names
+def writer_txt(file, names_list, line_number):
+    with open(file, "a+", encoding='utf-8') as f:
+        country = names_list[line_number]['name']['common']
+        url = f'https://en.wikipedia.org/wiki/' + country
+        f.write(f'{country} - {url}\n')
 
-class Json_one_iterate():
+class Json_iterator:
+    def __init__(self, line_number):
+        self.line_number = line_number
+        self.counter = 0
+
     def __iter__(self):
-        with open('countries.json') as f:
-            data = json.load(f)
-            self.x = iter(re.findall('("name": {"common":)''(.*?)''("official":)', data))
-            # self.x = iter(set(re.findall('("name": {"common":)''(.*?)''("official":)', data)))
-            # print(self.x)
         return self
-    def __next__(self):
-        t = self.x.pop()
-        return t.text
 
-pages = tuple(Json_one_iterate())
-print(pages)
-# for names in pages:
-#     print(names)
+    def __next__(self):
+        if self.counter < self.line_number:
+            writer_txt('countries.txt', file_json, self.counter)
+            self.counter += 1
+        else:
+            raise StopIteration
+file_json = json_reader("countries.json")
+iterator = [country for country in Json_iterator(250)]
