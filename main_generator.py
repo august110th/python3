@@ -18,10 +18,7 @@ import hashlib
 
 with open('countries.json') as f:
     names = json.load(f)
-    data = json.dumps(names)
     # print(type(names))
-    # print(type(data))
     for line in names:
-        h = str(line)
-        hashlib.md5(h.encode('utf-8')).hexdigest()
+        h = hashlib.md5(str(line).encode('utf-8'))
         print(h)
