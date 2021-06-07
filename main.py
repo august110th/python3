@@ -4,8 +4,8 @@ import json
 def json_reader(file):
     with open(file.encode()) as f:
         names = json.load(f)
-        print(names)
     return names
+
 def writer_txt(file, names_list, line_number):
     with open(file, "a+", encoding='utf-8') as f:
         country = names_list[line_number]['name']['common']
